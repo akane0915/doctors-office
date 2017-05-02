@@ -27,4 +27,16 @@ class Doctor
     result = DB.exec("INSERT INTO doctors (name, specialty_id) VALUES ('#{@name}', #{@specialty_id}) RETURNING id;")
     @id = result.first.fetch('id').to_i
   end
+
+  def patients
+    list_of_patients = []
+    patients = DB.exec("SELECT * FROM patients WHERE doctor_id = '#{self.id}';")
+    patients.each do |patient|
+      name = patient.fetch('name')
+      birthdate = patient.fetch('birthdate')
+      doctor_id = patient.fetch('doctor_id').to_i
+      list_of_patients.push(Patient.new({:name => name, :birthdate => birthdate, :doctor_id => doctor_id}))
+    end
+    list_of_patients
+  end
 end
