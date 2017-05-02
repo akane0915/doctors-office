@@ -37,4 +37,14 @@ class Specialty
     end
   list_of_doctors
   end
+
+  def self.find (id)
+    found_specialty = nil
+    Specialty.all.each do |specialty|
+      if specialty.id == id
+        found_specialty = specialty
+      end
+    end
+    found_specialty
+  end
 end

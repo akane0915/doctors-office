@@ -49,4 +49,14 @@ describe(Specialty) do
       expect(specialty1.doctors).to(eq([doctor2, doctor1]))
     end
   end
+
+  describe(".find") do
+    it('returns a specialty by its ID') do
+      specialty1 = Specialty.new({:description => 'Pediatrics', :id => nil})
+      specialty1.save
+      specialty2 = Specialty.new({:description => 'Orthopedics', :id => nil})
+      specialty2.save
+      expect(Specialty.find(specialty2.id)).to(eq(specialty2))
+    end
+  end
 end

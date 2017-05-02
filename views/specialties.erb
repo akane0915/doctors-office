@@ -1,0 +1,13 @@
+<%if @specialties.any? %>
+  <h2>Specialties:</h2>
+
+  <ul>
+    <%@specialties.each do |specialty| %>
+      <li><a href='/specialties/<%=specialty.id%>'><%=specialty.description%></a></li>
+    <%end%>
+  </ul>
+
+<%else%>
+  <h2>No specialties have been created yet</h2>
+
+<%end%>
