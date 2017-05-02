@@ -51,9 +51,21 @@ describe(Doctor) do
       doctor1.save
       patient1 = Patient.new({:name => 'Sally', :birthdate => '1990-01-05', :doctor_id => doctor1.id})
       patient1.save
-      patient2 = Patient.new({:name => 'Sally', :birthdate => '1990-01-05', :doctor_id => doctor1.id})
+      patient2 = Patient.new({:name => 'Joe', :birthdate => '1990-02-05', :doctor_id => doctor1.id})
       patient2.save
       expect(doctor1.patients).to(eq([patient1, patient2]))
+    end
+  end
+
+  describe('#patient_count') do
+    it('returns the number of patients for a given doctor') do
+      doctor1 = Doctor.new({:name => 'Michael', :specialty_id => 1, :id => nil})
+      doctor1.save
+      patient1 = Patient.new({:name => 'Sally', :birthdate => '1990-01-05', :doctor_id => doctor1.id})
+      patient1.save
+      patient2 = Patient.new({:name => 'Joe', :birthdate => '1990-02-05', :doctor_id => doctor1.id})
+      patient2.save
+      expect(doctor1.patient_count).to(eq(2))
     end
   end
 end

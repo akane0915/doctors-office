@@ -26,4 +26,15 @@ class Specialty
     @id = result.first.fetch('id').to_i
   end
 
+  def doctors
+    returned_doctors = DB.exec("SELECT * FROM doctors WHERE specialty_id = '#{self.id}' ORDER BY name; ")
+    list_of_doctors = []
+    returned_doctors.each do |doctor|
+      name = doctor.fetch('name')
+      specialty_id = doctor.fetch("specialty_id").to_i
+      id = doctor.fetch('id').to_i
+      list_of_doctors.push(Doctor.new({:name => name, :specialty_id => specialty_id, :id => id}))
+    end
+  list_of_doctors
+  end
 end

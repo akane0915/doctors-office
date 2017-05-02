@@ -39,4 +39,8 @@ class Doctor
     end
     list_of_patients
   end
+
+  def patient_count
+    DB.exec("SELECT COUNT (*) FROM patients WHERE doctor_id = '#{self.id}';").first.fetch('count').to_i
+  end
 end

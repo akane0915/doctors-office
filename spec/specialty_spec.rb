@@ -37,4 +37,16 @@ describe(Specialty) do
       expect(Specialty.all).to(eq([specialty1]))
     end
   end
+
+  describe('#doctors') do
+    it('returns all doctors for a given specialty in alphabetical order') do
+      specialty1 = Specialty.new({:description => 'Pediatrics', :id => nil})
+      specialty1.save
+      doctor1 = Doctor.new({:name => 'Michael', :specialty_id => specialty1.id, :id => nil})
+      doctor1.save
+      doctor2 = Doctor.new({:name => 'Cynthia', :specialty_id => specialty1.id, :id => nil})
+      doctor2.save
+      expect(specialty1.doctors).to(eq([doctor2, doctor1]))
+    end
+  end
 end
